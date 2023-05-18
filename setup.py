@@ -29,7 +29,7 @@ def get_version():
 requirements = [
     "numpy",
     "pandas",
-    "vedo==2021.0.5",
+    "vedo>=2023.4.4",
     "k3d==2.7.4",
     "msgpack",
     "pyyaml>=5.3",

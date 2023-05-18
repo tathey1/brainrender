@@ -111,7 +111,7 @@ class Scene(JupyterMixIn, Render):
 
         inset = self._root_mesh.clone()
         inset.alpha(1)  # scale(0.5)
-        self.plotter.addInset(inset, pos=(0.95, 0.1), draggable=False)
+        self.plotter.add_inset(inset, pos=(0.95, 0.1), draggable=False)
 
         if settings.SHADER_STYLE == "cartoon":
             inset.lighting("off")
@@ -252,7 +252,7 @@ class Scene(JupyterMixIn, Render):
             - if "both" the complete mesh is returned
             - if "left"/"right" only the corresponding half
                 of the mesh is returned
-        :param force: bool. If true force adding of region even 
+        :param force: bool. If true force adding of region even
             if already rendered
         """
         if silhouette is None:
@@ -348,13 +348,7 @@ class Scene(JupyterMixIn, Render):
         actor._label_str = label
         actor._label_kwargs = kwargs
 
-    def slice(
-        self,
-        plane,
-        actors=None,
-        close_actors=False,
-        invert=False
-    ):
+    def slice(self, plane, actors=None, close_actors=False, invert=False):
         """
         Slices actors with a plane.
 
@@ -368,10 +362,12 @@ class Scene(JupyterMixIn, Render):
         :param invert: Invert the slice direction.
         """
         if isinstance(plane, str):
-            if invert == False:
+            if invert is False:
                 norm = self.atlas.space.plane_normals[plane]
-            elif invert == True:
-                norm = tuple(x*-1 for x in self.atlas.space.plane_normals[plane])
+            elif invert is True:
+                norm = tuple(
+                    x * -1 for x in self.atlas.space.plane_normals[plane]
+                )
             plane = self.atlas.get_plane(plane=plane, norm=norm)
 
         if not actors or actors is None:
